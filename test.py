@@ -11,13 +11,23 @@ def getHTML(url):
     except:
         return ""
 
-def findPrice(html):
+def findPrice(html, Pricelist, namelist):
     soup = BeautifulSoup(html, "html.parser")
-    print(soup)
+    allPrice = soup.find_all(class_="price active")
+    allName = soup.find_all(class_="shoname")
+
+    for price in allPrice:
+        Pricelist.append(price.string)
+    
+    for name in allName:
+        namelist.append(name.string)
 
 def main():
+    Pricelist = ()
+    namelist = ()
     url = 'http://kmg.kamigo.cn/link/63MO6OU70MB6K34I'
     html = getHTML(url)
-    findPrice(html)
+    findPrice(html, Pricelist, namelist)
+
 main()
 
